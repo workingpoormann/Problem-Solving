@@ -12,6 +12,7 @@ export default function Problem() {
   const { problemId } = useParams();
   const [problem, setProblem] = React.useState<ProblemType>({
     id: 0,
+    title: "",
     question: "",
     answer: "",
   });
@@ -27,9 +28,11 @@ export default function Problem() {
 
   return (
     <section>
-      <header className="mb-10">
+      <header className="my-8">
         <NavLink to="/">
-          <h1>Problem {problem.id}</h1>
+          <h1>
+            {problem.id}. {problem.title}
+          </h1>
         </NavLink>
       </header>
 
@@ -46,7 +49,7 @@ export default function Problem() {
               {problem.answer}
             </p>
           ) : (
-            <p className="text-gray-300">Answer: Click to show</p>
+            <p className="text-gray-300 text-xl">Answer: Click to show</p>
           )}
         </div>
       </section>

@@ -26,7 +26,7 @@ export default function Problems() {
           className={`hover:bg-sky-500 hover:text-sky-950 text-lg
             transition duration-200`}
         >
-          <div className="border border-solid p-2">{problem.question}</div>
+          <div className="border border-solid p-2">{problem.title}</div>
         </Link>
       ))}
     </section>

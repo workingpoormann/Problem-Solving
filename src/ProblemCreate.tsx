@@ -14,6 +14,7 @@ export default function ProblemCreate() {
           await fetch("http://localhost:3001/problem", {
             method: "POST",
             body: JSON.stringify({
+              title: formData.get("title"),
               question: formData.get("question"),
               answer: formData.get("answer"),
             }),
@@ -43,18 +44,28 @@ export default function ProblemCreate() {
         </header>
 
         <section className="flex flex-col gap-6">
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Title"
+            className={`border border-gray-400 rounded-md p-2
+              text-lg text-gray-200`}
+          />
           <textarea
             name="question"
             id="question"
             placeholder="Question"
-            className="border-2 border-white rounded-md p-2 h-64"
+            className={`border border-gray-400 rounded-md p-2 h-64
+              text-lg text-gray-200`}
           ></textarea>
 
           <textarea
             name="answer"
             id="answer"
             placeholder="Answer"
-            className="border-2 border-white rounded-md p-2 h-64"
+            className={`border border-gray-400 rounded-md p-2 h-64
+              text-lg text-gray-200`}
           ></textarea>
         </section>
       </form>

@@ -24,10 +24,11 @@ app.get("/problem/:problemId", async (req, res) => {
 
 app.post("/problem", async (req, res) => {
   try {
-    const { question, answer } = req.body;
+    const { title, question, answer } = req.body;
 
     const problem = await prisma.problem.create({
       data: {
+        title,
         question,
         answer,
       },
