@@ -4,6 +4,7 @@ import { prisma } from "./lib/prisma.ts";
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 app.get("/problem", async (req, res) => {
   const problems = await prisma.problem.findMany();
@@ -11,7 +12,7 @@ app.get("/problem", async (req, res) => {
 });
 
 app.get("/problem/:problemId", async (req, res) => {
-  let problemId = Number(req.params.problemId);
+  const problemId = Number(req.params.problemId);
 
   const problem = await prisma.problem.findFirst({
     where: {
@@ -19,6 +20,24 @@ app.get("/problem/:problemId", async (req, res) => {
     },
   });
   res.json(problem);
+});
+
+app.post("/problem", async (req, res) => {
+  try {
+    const { question, answer } = req.body;
+
+    const problem = await prisma.problem.create({
+      data: {
+        question,
+        answer,
+      },
+    });
+    console.log(problem);
+    res.status(201).json({ message: "created" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "error" });
+  }
 });
 
 const PORT = 3001;
