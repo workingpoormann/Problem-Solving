@@ -8,7 +8,7 @@ const fetchData = async (id: number) => {
   return data;
 };
 
-export default function Problem() {
+export default function ProblemDetail() {
   const { problemId } = useParams();
   const [problem, setProblem] = React.useState<ProblemType>({
     id: 0,

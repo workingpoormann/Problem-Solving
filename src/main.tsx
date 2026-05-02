@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.tsx";
 import "./index.css";
-import Problem from "./Problem.tsx";
 import ProblemCreate from "./ProblemCreate.tsx";
+import ProblemDetail from "./ProblemDetail.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -12,7 +12,7 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/problem/create" element={<ProblemCreate />} />
-        <Route path="/problem/:problemId" element={<Problem />} />
+        <Route path="/problem/:problemId" element={<ProblemDetail />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
