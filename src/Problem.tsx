@@ -23,7 +23,7 @@ export default function Problem() {
 
   React.useEffect(() => {
     fetchData(Number(problemId)).then(setProblem);
-  }, []);
+  }, [problemId]);
 
   return (
     <section>
