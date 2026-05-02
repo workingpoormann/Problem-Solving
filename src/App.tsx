@@ -1,6 +1,6 @@
-import { Problems } from "./Problems";
+import Problems from "./Problems";
 
-function App() {
+export default function App() {
   return (
     <>
       <header>
@@ -11,5 +11,3 @@ function App() {
     </>
   );
 }
-
-export default App;
