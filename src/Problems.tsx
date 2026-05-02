@@ -1,6 +1,6 @@
 import React from "react";
-import type { ProblemType } from "../types/problem";
 import { Link } from "react-router";
+import type { ProblemType } from "../types/problem";
 
 const fetchData = async () => {
   const res = await fetch("http://localhost:3001/problem");
@@ -18,12 +18,15 @@ export default function Problems() {
   }, []);
 
   return (
-    <section className="flex flex-col mx-20 gap-10">
+    <section className="flex flex-col mx-20 gap-2">
       {problems.map((problem) => (
-        <Link key={problem.id} to={`/problem/${problem.id}`}>
-          <div className="border border-solid p-2">
-            {problem.question} {problem.answer}
-          </div>
+        <Link
+          key={problem.id}
+          to={`/problem/${problem.id}`}
+          className={`hover:bg-sky-500 hover:text-sky-950 text-lg
+            transition duration-200`}
+        >
+          <div className="border border-solid p-2">{problem.question}</div>
         </Link>
       ))}
     </section>

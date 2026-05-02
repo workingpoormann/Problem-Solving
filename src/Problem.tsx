@@ -33,16 +33,20 @@ export default function Problem() {
         </NavLink>
       </header>
 
-      <section className="flex flex-col gap-4 mx-10">
-        <div className="border p-2 flex">
-          <p className="">{problem.question}</p>
+      <section className="flex flex-col gap-10 mx-10">
+        <div className="border p-3 flex rounded-md">
+          <p className="whitespace-pre text-lg text-left text-gray-300">
+            {problem.question}
+          </p>
         </div>
 
-        <div className="flex border p-2" onClick={toggleVisibility}>
+        <div className={`border p-3 rounded-md`} onClick={toggleVisibility}>
           {isVisible ? (
-            <p>Answer: Click to show</p>
+            <p className="whitespace-pre text-lg text-left text-gray-300">
+              {problem.answer}
+            </p>
           ) : (
-            <p className="">{problem.answer}</p>
+            <p className="text-gray-300">Answer: Click to show</p>
           )}
         </div>
       </section>
