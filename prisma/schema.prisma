@@ -13,8 +13,8 @@ datasource db {
 }
 
 model Problem {
-  id       Int     @id @default(autoincrement())
-  title    String?
+  id       Int    @id @default(autoincrement())
+  title    String
   question String
   answer   String
 }
