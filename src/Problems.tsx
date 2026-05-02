@@ -18,15 +18,20 @@ export default function Problems() {
   }, []);
 
   return (
-    <section className="flex flex-col mx-20 gap-2">
+    <section className="flex flex-col mx-20 gap-3">
       {problems.map((problem) => (
         <Link
           key={problem.id}
           to={`/problem/${problem.id}`}
-          className={`hover:bg-sky-500 hover:text-sky-950 text-lg
-            transition duration-200`}
+          className={`text-lg rounded-md transition duration-200`}
         >
-          <div className="border border-solid p-2">{problem.title}</div>
+          <div
+            className={`border p-2 text-gray-200 rounded-md
+            hover:border-sky-500 hover:bg-sky-900 hover:text-grey-100
+            transition duration-200`}
+          >
+            {problem.title}
+          </div>
         </Link>
       ))}
     </section>
