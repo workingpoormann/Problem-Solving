@@ -1,9 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router";
-import { useParams } from "react-router";
+import { NavLink, useParams } from "react-router";
 import type { ProblemType } from "../types/problem";
 
-const fetchData = async (id: Number) => {
+const fetchData = async (id: number) => {
   const res = await fetch(`http://localhost:3001/problem/${id}`);
   const data = await res.json();
   return data;
