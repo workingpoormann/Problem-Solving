@@ -17,22 +17,35 @@ export default function Problem() {
     answer: "",
   });
 
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+  function toggleVisibility() {
+    setIsVisible(!isVisible);
+  }
+
   React.useEffect(() => {
-    console.log("problemId: ", problemId);
     fetchData(Number(problemId)).then(setProblem);
   }, []);
 
   return (
     <section>
-      <header>
+      <header className="mb-10">
         <NavLink to="/">
           <h1>Problem {problem.id}</h1>
         </NavLink>
       </header>
 
-      <section>
-        <p>{problem.question}</p>
-        <p>{problem.answer}</p>
+      <section className="flex flex-col gap-4 mx-10">
+        <div className="border p-2 flex">
+          <p className="">{problem.question}</p>
+        </div>
+
+        <div className="flex border p-2" onClick={toggleVisibility}>
+          {isVisible ? (
+            <p>Answer: Click to show</p>
+          ) : (
+            <p className="">{problem.answer}</p>
+          )}
+        </div>
       </section>
     </section>
   );
