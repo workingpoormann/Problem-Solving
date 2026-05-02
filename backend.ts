@@ -41,6 +41,21 @@ app.post("/problem", async (req, res) => {
   }
 });
 
+app.put("/problem/edit/:problemId", async (req, res) => {
+  const { title, question, answer } = req.body;
+  const problem = await prisma.problem.update({
+    where: {
+      id: parseInt(req.params?.problemId),
+    },
+    data: {
+      title,
+      question,
+      answer,
+    },
+  });
+  res.json({ problem });
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
