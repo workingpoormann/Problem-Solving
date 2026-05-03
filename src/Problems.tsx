@@ -26,7 +26,7 @@ export default function Problems() {
           className={`text-lg rounded-md transition duration-200`}
         >
           <div
-            className={`border p-2 text-gray-200 rounded-md
+            className={`border p-2 text-center text-gray-200 rounded-md
             hover:border-sky-500 hover:bg-sky-900 hover:text-grey-100
             transition duration-200`}
           >
