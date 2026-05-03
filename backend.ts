@@ -56,6 +56,23 @@ app.put("/problem/edit/:problemId", async (req, res) => {
   res.json({ problem });
 });
 
+app.delete("/problem/:problemId", async (req, res) => {
+  const problemId = Number(req.params.problemId);
+
+  try {
+    const deletedProblem = await prisma.problem.delete({
+      where: {
+        id: problemId,
+      },
+    });
+
+    res.status(204).json(deletedProblem);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ err: `problem:${problemId} is not found.` });
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
