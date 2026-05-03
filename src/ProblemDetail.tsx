@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, useNavigate, useParams } from "react-router";
 import { deletProblemById } from "./api/problemApi";
 import { AnswerBox } from "./components/AnswerBox";
+import { ProblemMenu } from "./components/ProblemMenu";
 import { useOutsideClick } from "./hooks/useOutsideClick";
 import { useProblem } from "./hooks/useProblem";
 
@@ -50,26 +51,10 @@ export default function ProblemDetail() {
       </header>
 
       {openMenu && (
-        <section
-          ref={menuRef}
-          className={`flex flex-col gap-10 mt-20 mr-10 p-10 justify-end
-              absolute top-0 right-0 bg-gray-700 rounded-lg
-              delay-300`}
-        >
-          <NavLink
-            to={`/problem/edit/${problemId}`}
-            className={`p-2 border rounded-md bg-yellow-900 text-gray-200`}
-          >
-            Edit
-          </NavLink>
-
-          <button
-            onClick={handleDelete}
-            className={`p-2 border rounded-md bg-red-900 text-gray-200`}
-          >
-            Delete
-          </button>
-        </section>
+        <ProblemMenu
+          menuRef={menuRef}
+          problemId={problemId}
+          handleDelete={handleDelete}
         />
       )}
 
