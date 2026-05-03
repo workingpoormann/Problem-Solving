@@ -1,16 +1,10 @@
 import React from "react";
 import { NavLink, useNavigate, useParams } from "react-router";
-import type { ProblemType } from "../types/problem";
-import { getProblemById } from "./api/problemApi";
+import { useProblem } from "./hooks/useProblem";
 
 export default function ProblemDetail() {
   const { problemId } = useParams();
-  const [problem, setProblem] = React.useState<ProblemType>({
-    id: 0,
-    title: "",
-    question: "",
-    answer: "",
-  });
+  const { problem, loading } = useProblem(Number(problemId));
 
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
   function toggleVisibility() {
