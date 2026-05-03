@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate, useParams } from "react-router";
+import { deletProblemById } from "./api/problemApi";
 import { useOutsideClick } from "./hooks/useOutsideClick";
 import { useProblem } from "./hooks/useProblem";
 
@@ -23,24 +24,11 @@ export default function ProblemDetail() {
 
   const navigate = useNavigate();
   const handleDelete = async () => {
-    // show alert
-    const ok = window.confirm(
-      `Are you sure to delet this "${problem.title}" ?`,
-    );
-    if (!ok) return;
+    if (!window.confirm(`Are you sure to delet this "${problem.title}"?`))
+      return;
 
-    try {
-      const res = await fetch(`http://localhost:3001/problem/${problemId}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) {
-        throw new Error("fail to delete D:");
-      }
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-      alert("Fail to delete D:");
-    }
+    await deletProblemById(Number(problemId));
+    navigate("/");
   };
 
   return (
