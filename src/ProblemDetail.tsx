@@ -1,17 +1,13 @@
 import React from "react";
 import { NavLink, useNavigate, useParams } from "react-router";
 import { deletProblemById } from "./api/problemApi";
+import { AnswerBox } from "./components/AnswerBox";
 import { useOutsideClick } from "./hooks/useOutsideClick";
 import { useProblem } from "./hooks/useProblem";
 
 export default function ProblemDetail() {
   const { problemId } = useParams();
   const { problem, loading } = useProblem(Number(problemId));
-
-  const [isVisible, setIsVisible] = React.useState<boolean>(false);
-  function toggleVisibility() {
-    setIsVisible(!isVisible);
-  }
 
   // toggle menu
   const menuRef = React.useRef<HTMLDivElement | null>(null);
@@ -74,25 +70,12 @@ export default function ProblemDetail() {
             Delete
           </button>
         </section>
+        />
       )}
 
-      <section className="flex flex-col gap-10">
-        <div className="border p-3 flex rounded-md">
-          <p className="whitespace-pre text-lg text-left text-gray-300">
-            {problem.question}
-          </p>
-        </div>
-
-        <div className={`border p-3 rounded-md`} onClick={toggleVisibility}>
-          {isVisible ? (
-            <p className="whitespace-pre text-lg text-left text-gray-300">
-              {problem.answer}
-            </p>
-          ) : (
-            <p className="text-gray-300 text-xl">Answer: Click to show</p>
-          )}
-        </div>
-      </section>
+      {!loading && (
+        <AnswerBox question={problem.question} answer={problem.answer} />
+      )}
     </section>
   );
 }
