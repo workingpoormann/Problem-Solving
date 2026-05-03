@@ -28,7 +28,7 @@ export default function ProblemCreate() {
       >
         <header className="flex justify-around items-baseline">
           <NavLink to="/">
-            <h1 className="text-xl">Problem Create</h1>
+            <h1 className="text-xl text-gray-200">Problem Create</h1>
           </NavLink>
 
           <button

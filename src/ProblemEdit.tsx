@@ -49,7 +49,9 @@ export default function ProblemEdit() {
       >
         <header className="flex justify-around items-baseline">
           <NavLink to="/">
-            <h1 className="text-xl">Problem Edit</h1>
+            <h1 className="text-xl text-gray-200 underline underline-offset-2">
+              Problem Edit
+            </h1>
           </NavLink>
 
           <button
