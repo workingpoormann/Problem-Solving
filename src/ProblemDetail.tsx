@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useParams } from "react-router";
+import { NavLink, useNavigate, useParams } from "react-router";
 import type { ProblemType } from "../types/problem";
 
 const fetchData = async (id: number) => {
@@ -49,6 +49,28 @@ export default function ProblemDetail() {
     };
   }, [problemId]);
 
+  const navigate = useNavigate();
+  const handleDelete = async () => {
+    // show alert
+    const ok = window.confirm(
+      `Are you sure to delet this "${problem.title}" ?`,
+    );
+    if (!ok) return;
+
+    try {
+      const res = await fetch(`http://localhost:3001/problem/${problemId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        throw new Error("fail to delete D:");
+      }
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      alert("Fail to delete D:");
+    }
+  };
+
   return (
     <section className="mx-10">
       <header className="flex justify-around items-baseline w-auto mb-10">
@@ -84,12 +106,13 @@ export default function ProblemDetail() {
           >
             Edit
           </NavLink>
-          <NavLink
-            to={`/problem/delete/${problemId}`}
+
+          <button
+            onClick={handleDelete}
             className={`p-2 border rounded-md bg-red-900 text-gray-200`}
           >
             Delete
-          </NavLink>
+          </button>
         </section>
       )}
 
