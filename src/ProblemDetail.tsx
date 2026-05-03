@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate, useParams } from "react-router";
+import { useOutsideClick } from "./hooks/useOutsideClick";
 import { useProblem } from "./hooks/useProblem";
 
 export default function ProblemDetail() {
@@ -13,30 +14,12 @@ export default function ProblemDetail() {
 
   // toggle menu
   const menuRef = React.useRef<HTMLDivElement | null>(null);
-
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
   function toggleMenu(e: React.MouseEvent) {
     e.stopPropagation();
-    e.preventDefault();
     setOpenMenu((prev) => !prev);
   }
-
-  React.useEffect(() => {
-    getProblemById(Number(problemId)).then(setProblem);
-
-    function handleClickOutside(event: MouseEvent) {
-      console.log("click");
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setOpenMenu(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [problemId]);
+  useOutsideClick(menuRef, setOpenMenu);
 
   const navigate = useNavigate();
   const handleDelete = async () => {
