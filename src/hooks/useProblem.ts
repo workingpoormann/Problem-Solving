@@ -1,6 +1,6 @@
 import React from "react";
 import type { ProblemType } from "../../types/problem";
-import { getProblemById } from "../api/problemApi";
+import { getProblemById, getProblems } from "../api/problemApi";
 
 export const useProblem = (
   problemId: number,
@@ -20,4 +20,20 @@ export const useProblem = (
   }, [problemId]);
 
   return { problem, loading };
+};
+
+export const useProblems = (): {
+  problems: ProblemType[];
+  loading: boolean;
+} => {
+  const [problems, setProblems] = React.useState<ProblemType[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    getProblems()
+      .then(setProblems)
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { problems, loading };
 };

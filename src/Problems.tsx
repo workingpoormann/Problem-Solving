@@ -1,21 +1,10 @@
-import React from "react";
 import { Link } from "react-router";
-import type { ProblemType } from "../types/problem";
-
-const fetchData = async () => {
-  const res = await fetch("http://localhost:3001/problem");
-  const data = await res.json();
-  return data;
-};
+import { useProblems } from "./hooks/useProblem";
 
 export default function Problems() {
-  const [problems, setProblems] = React.useState<ProblemType[]>([]);
+  const { problems, loading } = useProblems();
 
-  React.useEffect(() => {
-    fetchData().then((data) => {
-      setProblems(data);
-    });
-  }, []);
+  if (loading) return <div>Loading...</div>;
 
   return (
     <section className="flex flex-col mx-20 gap-3">

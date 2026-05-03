@@ -1,7 +1,11 @@
+export const getProblems = async () => {
+  const res = await fetch(`http://localhost:3001/problem`);
+  return await res.json();
+};
+
 export const getProblemById = async (id: number) => {
   const res = await fetch(`http://localhost:3001/problem/${id}`);
-  const data = await res.json();
-  return data;
+  return await res.json();
 };
 
 export const deletProblemById = async (id: number) => {
