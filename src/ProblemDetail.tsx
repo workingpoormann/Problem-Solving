@@ -1,12 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate, useParams } from "react-router";
 import type { ProblemType } from "../types/problem";
-
-const fetchData = async (id: number) => {
-  const res = await fetch(`http://localhost:3001/problem/${id}`);
-  const data = await res.json();
-  return data;
-};
+import { getProblemById } from "./api/problemApi";
 
 export default function ProblemDetail() {
   const { problemId } = useParams();
@@ -33,7 +28,7 @@ export default function ProblemDetail() {
   }
 
   React.useEffect(() => {
-    fetchData(Number(problemId)).then(setProblem);
+    getProblemById(Number(problemId)).then(setProblem);
 
     function handleClickOutside(event: MouseEvent) {
       console.log("click");
