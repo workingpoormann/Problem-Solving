@@ -7,8 +7,26 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/problem", async (req, res) => {
-  const problems = await prisma.problem.findMany();
-  res.json(problems);
+  // When a url of "/problem" has some uery parameters,
+  // get this query param. This is a search word.
+  const { search } = req.query;
+  const searchWord = typeof search === "string" ? search : undefined;
+
+  if (!searchWord || searchWord.trim() === "") {
+    const problems = await prisma.problem.findMany();
+    res.json(problems);
+  } else {
+    const problems = await prisma.problem.findMany({
+      where: {
+        OR: [
+          { title: { contains: searchWord } },
+          { question: { contains: searchWord } },
+          { answer: { contains: searchWord } },
+        ],
+      },
+    });
+    res.json(problems);
+  }
 });
 
 app.get("/problem/:problemId", async (req, res) => {

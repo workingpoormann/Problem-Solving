@@ -3,6 +3,13 @@ export const getProblems = async () => {
   return await res.json();
 };
 
+export const getProblemSearch = async (word: string) => {
+  const res = await fetch(`http://localhost:3001/problem?search=${word}`);
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
+
 export const getProblemById = async (id: number) => {
   const res = await fetch(`http://localhost:3001/problem/${id}`);
   return await res.json();

@@ -24,6 +24,7 @@ export const useProblem = (
 
 export const useProblems = (): {
   problems: ProblemType[];
+  setProblems: React.Dispatch<React.SetStateAction<ProblemType[]>>;
   loading: boolean;
 } => {
   const [problems, setProblems] = React.useState<ProblemType[]>([]);
@@ -35,5 +36,5 @@ export const useProblems = (): {
       .finally(() => setLoading(false));
   }, []);
 
-  return { problems, loading };
+  return { problems, setProblems, loading };
 };
