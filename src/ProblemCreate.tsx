@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router";
+import { createProblem } from "./api/problemApi";
 
 export default function ProblemCreate() {
   const navigate = useNavigate();
@@ -11,18 +12,7 @@ export default function ProblemCreate() {
         onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
-          await fetch("http://localhost:3001/problem", {
-            method: "POST",
-            body: JSON.stringify({
-              title: formData.get("title"),
-              question: formData.get("question"),
-              answer: formData.get("answer"),
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-
+          await createProblem(formData);
           navigate("/");
         }}
       >
